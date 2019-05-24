@@ -35,7 +35,14 @@ namespace ContosoUniversity.Controllers
             }
 
             var student = await _context.Students
-                .FirstOrDefaultAsync(m => m.Id == id);
+       .Include(s => s.Enrollments)
+           .ThenInclude(e => e.Course)
+       .AsNoTracking()
+       .FirstOrDefaultAsync(m => m.Id == id);
+            //The Include and ThenInclude methods cause the context to load the Student.Enrollments 
+            //navigation property, and within each enrollment the Enrollment.Course navigation property.
+            //The AsNoTracking method improves performance in scenarios where the entities returned won't 
+            //be updated in the current context's lifetime.
             if (student == null)
             {
                 return NotFound();
