@@ -63,6 +63,10 @@ namespace ContosoUniversity.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("LastName,FirstMidName,EnrollmentDate")] Student student)
+        /////////////////////
+        /////removed ID from the Bind attribute because ID is the primary key value which SQL Server will 
+        /////set automatically when the row is inserted
+        ///////////////
         {
             try
             {
