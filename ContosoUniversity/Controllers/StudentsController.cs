@@ -171,7 +171,8 @@ namespace ContosoUniversity.Controllers
         ///Above code was the original Edit method that was scaffolded in
 
         // GET: Students/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? id, bool? saveChangesError = false)
+            //bool parameter indicates if method was called after failure to save changes
         {
             if (id == null)
             {
@@ -179,12 +180,15 @@ namespace ContosoUniversity.Controllers
             }
 
             var student = await _context.Students
+                .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (student == null)
+            if (saveChangesError.GetValueOrDefault())
+            //if called by post it will be true and display error message
             {
-                return NotFound();
+                ViewData["ErrorMessage"] = "Delete failed" +
+                    "Try again, and if the problem persists" +
+                    "see your system administrator.";
             }
-
             return View(student);
         }
 
