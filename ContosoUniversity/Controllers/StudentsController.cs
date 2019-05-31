@@ -29,6 +29,7 @@ namespace ContosoUniversity.Controllers
             //value is recieved from a textbox in the view
 
             var students = from s in _context.Students select s;
+            //query that selects all students in list
 
             if(!String.IsNullOrEmpty(searchString))
             {
