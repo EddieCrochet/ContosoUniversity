@@ -45,6 +45,7 @@ namespace ContosoUniversity.Controllers
             //set up a different query for each type of list organization
 
             return View(await students.AsNoTracking().ToListAsync());
+            //not executed to database until right here
 
             //return View(await _context.Students.ToListAsync());
             //gets a list by reading the Students DbSet property of the context instance
