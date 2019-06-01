@@ -20,11 +20,26 @@ namespace ContosoUniversity.Controllers
         }
 
         // GET: Students
-        public async Task<IActionResult> Index(string sortOrder, string searchString)
+        public async Task<IActionResult> Index(
+            string sortOrder, 
+            string currentFilter,
+            string searchString,
+            int? pageNumber)
         {
+            ViewData["curentSort"] = sortOrder;
             ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             //ternary statements used by view for column hyperlinks
             ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+
+            if(searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
             ViewData["CurrentFilter"] = searchString;
             //value is recieved from a textbox in the view
 
@@ -54,7 +69,9 @@ namespace ContosoUniversity.Controllers
             }
             //set up a different query for each type of list organization
 
-            return View(await students.AsNoTracking().ToListAsync());
+            int pageSize = 3;
+            return View(await PaginatedList<Student>.CreateAsync(students.AsNoTracking(),
+                pageNumber ?? 1, pageSize));
             //not executed to database until right here
 
             //return View(await _context.Students.ToListAsync());

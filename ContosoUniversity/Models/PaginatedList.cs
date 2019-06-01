@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 namespace ContosoUniversity.Models
 {
     public class PaginatedList<T> : List<T>
+    //uses Skip and Take statements to filter
+    //data on the server instead of always retrieving all rows of the table
     {
         public int PageIndex { get; private set; }
         public int TotalPages { get; private set; }
