@@ -37,7 +37,7 @@ namespace ContosoUniversity.Controllers
                 || s.FirstMidName.Contains(searchString));
             }
 
-            switch(sortOrder)
+            switch (sortOrder)
             {
                 case "name_desc":
                     students = students.OrderByDescending(s => s.LastName);

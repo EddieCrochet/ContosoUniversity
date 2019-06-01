@@ -28,7 +28,7 @@
             <th>
                 <!--uses the information in ViewData properties to set up 
                     hyperlinks with the appropriate query string values.-->
-                <a asp-action="Index" asp-route-sortOrder="ViewData["NameSortParm"]">
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">
                      @Html.DisplayNameFor(model => model.LastName)
                 </a>
             </th>
@@ -36,7 +36,7 @@
                 @Html.DisplayNameFor(model => model.FirstMidName)
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="ViewData["DateSortParm"]>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]">
                     @Html.DisplayNameFor(model => model.EnrollmentDate)
                 </a>
             </th>
