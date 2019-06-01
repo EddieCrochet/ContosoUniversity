@@ -12,6 +12,7 @@
 
 <!--this right here is my search bar!-->
 <form asp-action="Index" method="get">
+    <!--http get ensures form data is passed in the URL as query strings(able to bookmark)-->
     <div class="form-actions no-color">
         <p>
             Find by name: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
