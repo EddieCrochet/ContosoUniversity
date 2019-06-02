@@ -22,7 +22,7 @@ namespace ContosoUniversity.Controllers
 
         //I wanted to keep my about page so from the contoso uni 
         //app tutorial this is what they called about
-        public async Task<IActionResult> StudentsPerDate()
+        public async Task<IActionResult> SpecificInfo()
         {
             IQueryable<EnrollmentDateGroup> data =
                 //store in a collection of EnrollmentDateGroup view model objects
