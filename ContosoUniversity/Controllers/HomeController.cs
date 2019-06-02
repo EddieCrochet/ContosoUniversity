@@ -17,19 +17,19 @@ namespace ContosoUniversity.Controllers
 
         public HomeController(SchoolContext context)
         {
-            context = _context;
+            _context = context;
         }
 
         //I wanted to keep my about page so from the contoso uni 
         //app tutorial this is what they called about
-        public async Task<IActionResult> SpecificInfo()
+        public async Task<ActionResult> SpecificInfo()
         {
             IQueryable<EnrollmentDateGroup> data =
-                //store in a collection of EnrollmentDateGroup view model objects
                 from student in _context.Students
-                //groups student entities by enrollment date
                 group student by student.EnrollmentDate into dateGroup
                 select new EnrollmentDateGroup()
+                //store in a collection of EnrollmentDateGroup view model objects
+                //groups student entities by enrollment date
                 {
                     EnrollmentDate = dateGroup.Key,
                     //calculates number of entities in each group
