@@ -7,7 +7,7 @@
 <h2>All Contoso Uni Students!</h2>
 
 <p>
-    <a asp-action="Create">Add a new student!</a>
+    <a asp-action="Create" class="btn btn-success">Add a new student!</a>
 </p>
 
 <!--this right here is my search bar!-->
@@ -18,7 +18,7 @@
             Find by name: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
             <!--search bar and bring in view data for the search string-->
             <input type="submit" value="Search" class="btn btn-default" /> |
-            <a asp-action="Index">Back to Full List</a>
+            <a asp-action="Index" class="btn btn-default">Back to Full List</a>
         </p>
     </div>
 </form>
@@ -61,9 +61,9 @@
                     @Html.DisplayFor(modelItem => item.EnrollmentDate)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit Info</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-default">Edit Info</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-default">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id"class="btn btn-danger">Delete</a>
                 </td>
             </tr>
         }
