@@ -20,8 +20,30 @@ namespace ContosoUniversity.Controllers
         }
 
         // GET: Courses
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(
+            string sortOrder,
+            string currentFilter,
+            string searchString,
+            int? pageNumber)
         {
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name-desc" : "";
+            //these ternary statements help us switch the functionality
+            ViewData["CreditSortParm"] = sortOrder == "Credit" ? "Credit_desc" : "Credit";
+
+            if(searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+            //the search value is recieved from the search box in the index view
+
+
             return View(await _context.Courses.ToListAsync());
         }
 
