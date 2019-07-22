@@ -51,6 +51,8 @@ namespace ContosoUniversity.Controllers
                 students = students.Where(s => s.LastName.Contains(searchString)
                 || s.FirstMidName.Contains(searchString));
             }
+            //Filter the search BEFORE we decide the sortorder
+            //this way we only sort through what we have already filtered via our search
 
             switch (sortOrder)
             {

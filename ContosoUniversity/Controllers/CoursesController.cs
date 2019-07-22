@@ -27,7 +27,7 @@ namespace ContosoUniversity.Controllers
             int? pageNumber)
         {
             ViewData["CurrentSort"] = sortOrder;
-            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name-desc" : "";
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             //these ternary statements help us switch the functionality
             ViewData["CreditSortParm"] = sortOrder == "Credit" ? "Credit_desc" : "Credit";
 
@@ -42,6 +42,25 @@ namespace ContosoUniversity.Controllers
 
             ViewData["CurrentFilter"] = searchString;
             //the search value is recieved from the search box in the index view
+
+            var courses = from s in _context.Courses select s;
+            //query that selects all courses in db
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                courses = courses.Where(s => s.Title.Contains(searchString));
+            }
+            //Filter the search BEFORE we decide the sortorder
+            //this way we only sort through what we have already filtered via our search
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    courses = courses.OrderByDescending(s => s.Title);
+                    break;
+                case "Credit":
+                    courses = courses.OrderBy(s => s.Credits)
+            }
 
 
             return View(await _context.Courses.ToListAsync());
