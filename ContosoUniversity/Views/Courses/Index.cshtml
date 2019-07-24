@@ -1,7 +1,7 @@
-﻿@model IEnumerable<ContosoUniversity.Models.Course>
+﻿@model PaginatedList<ContosoUniversity.Models.Course>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Course List";
 }
 
 <h2>Index</h2>
@@ -13,10 +13,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]"
+asp-route-currentFilter="@ViewData["CurrentFilter"]">
+                Title
+                    </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Credits)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]">
+                    Credits
+                </a>
             </th>
             <th></th>
         </tr>
