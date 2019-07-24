@@ -59,7 +59,14 @@ namespace ContosoUniversity.Controllers
                     courses = courses.OrderByDescending(s => s.Title);
                     break;
                 case "Credit":
-                    courses = courses.OrderBy(s => s.Credits)
+                    courses = courses.OrderBy(s => s.Credits);
+                    break;
+                case "Credit_Desc":
+                    courses = courses.OrderByDescending(s => s.Credits);
+                    break;
+                default:
+                    courses = courses.OrderBy(s => s.Title);
+                    break;
             }
 
 
