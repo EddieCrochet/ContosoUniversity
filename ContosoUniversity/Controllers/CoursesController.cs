@@ -68,9 +68,9 @@ namespace ContosoUniversity.Controllers
                     courses = courses.OrderBy(s => s.Title);
                     break;
             }
-
-
-            return View(await _context.Courses.ToListAsync());
+            int pageSize = 3;
+            return View(await PaginatedList<Course>.CreateAsync(courses.AsNoTracking(),
+                pageNumber ?? 1, pageSize));
         }
 
         // GET: Courses/Details/5
