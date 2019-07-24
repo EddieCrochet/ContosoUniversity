@@ -11,12 +11,12 @@
 </p>
 
 <form asp-action="Index" method="get">
-<!--this is my search bar!-->
+    <!--this is my search bar!-->
     <div class="form-actions no-color">
         <p>
-            Find by Title: <input type="text" name="searchString" value="@ViewData["currentFilter"]"/>
+            Find by Title: <input type="text" name="searchString" value="@ViewData["currentFilter"]" />
             <!--search bar ad bringing in view for the saearch string-->
-            <input type="submit" value="Search" class="btn btn-default"/>
+            <input type="submit" value="Search" class="btn btn-default" />
             <a asp-action="Index" class="btn btn-default">Back to full list</a>
         </p>
     </div>
@@ -27,9 +27,9 @@
         <tr>
             <th>
                 <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]"
-asp-route-currentFilter="@ViewData["CurrentFilter"]">
-                Title
-                    </a>
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]">
+                    Title
+                </a>
             </th>
             <th>
                 <a asp-action="Index" asp-route-sortOrder="@ViewData["CreditSortParm"]"
@@ -41,20 +41,42 @@ asp-route-currentFilter="@ViewData["CurrentFilter"]">
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Credits)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.CourseId" class="btn btn-primary">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CourseId" class="btn btn-default">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CourseId" class="btn btn-danger">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Credits)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.CourseId" class="btn btn-primary">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.CourseId" class="btn btn-default">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.CourseId" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+asp-route-sortOrder="@ViewData["CurrentSort"]"
+asp-route-pageNumber="@(Model.PageIndex -1)"
+asp-route-currentFilter="@ViewData["CurrentFilter"]"
+class="btn btn-default @prevDisabled">
+Previous
+</a>
+
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @nextDisabled">
+    Next
+</a>
